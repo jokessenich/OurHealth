@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/OurHealth/static/css/main.561a0423.chunk.css",
+    "main.js": "/OurHealth/static/js/main.f5adeb4e.chunk.js",
+    "main.js.map": "/OurHealth/static/js/main.f5adeb4e.chunk.js.map",
+    "runtime-main.js": "/OurHealth/static/js/runtime-main.c3356d70.js",
+    "runtime-main.js.map": "/OurHealth/static/js/runtime-main.c3356d70.js.map",
+    "static/js/2.ee3c3e98.chunk.js": "/OurHealth/static/js/2.ee3c3e98.chunk.js",
+    "static/js/2.ee3c3e98.chunk.js.map": "/OurHealth/static/js/2.ee3c3e98.chunk.js.map",
+    "index.html": "/OurHealth/index.html",
+    "precache-manifest.4df0f66975a3a94331976d24d8787610.js": "/OurHealth/precache-manifest.4df0f66975a3a94331976d24d8787610.js",
+    "service-worker.js": "/OurHealth/service-worker.js",
+    "static/css/main.561a0423.chunk.css.map": "/OurHealth/static/css/main.561a0423.chunk.css.map",
+    "static/js/2.ee3c3e98.chunk.js.LICENSE": "/OurHealth/static/js/2.ee3c3e98.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c3356d70.js",
+    "static/js/2.ee3c3e98.chunk.js",
+    "static/css/main.561a0423.chunk.css",
+    "static/js/main.f5adeb4e.chunk.js"
+  ]
+}
