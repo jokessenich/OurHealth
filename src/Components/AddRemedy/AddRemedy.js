@@ -116,7 +116,7 @@ export default class AddRemedy extends React.Component {
                     return res.json()
             })
             .then(data => {
-                window.location.assign(`${config.API_ENDPOINT}/malady/${maladyResults[0].id}`)
+                window.location.assign(`${config.CLIENT_ROOT}/malady/${maladyResults[0].id}`)
             })
 
             .catch(error=> this.props.history.push('/ErrorPage'))
