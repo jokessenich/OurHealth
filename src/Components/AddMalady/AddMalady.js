@@ -20,6 +20,8 @@ export default class AddMalady extends React.Component {
             [e.currentTarget.id]: e.currentTarget.value
         })
 
+        console.log(this.state.description)
+
     }
 
     handleSubmit = (e) => {
@@ -50,6 +52,7 @@ export default class AddMalady extends React.Component {
         
 
         let newDescription = JSON.stringify(description)
+        let newSymptoms = JSON.stringify(symptoms)
 
         if(newDescription.length <10){
             this.setState({
@@ -70,13 +73,27 @@ export default class AddMalady extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: `{"malady_name": "${name}",
-                    "malady_description": "${description}",
-                    "malady_symptoms": "${symptoms}"
+                    "malady_description": ${newDescription},
+                    "malady_symptoms": ${newSymptoms}
                 }`
         })
-            .then(res => res.json())
+            .then(res => {
+                if(!res.ok){
+                    return res.json()
+                    .then(error=>{
+                        throw error
+                    })
+                    
+                }
+                return res.json()})
             .then(data => {
+                debugger;
                 window.location.assign(`${config.CLIENT_ROOT}/maladylist`)})
+            .catch(error=>{
+                this.setState({
+                    error: error.message
+                })
+            })
     }
 
     render() {

@@ -23,6 +23,8 @@ export default class AddRemedy extends React.Component {
             [e.currentTarget.id]: e.currentTarget.value
         })
 
+        console.log(this.state.description)
+
         if (e.currentTarget.id === "malady") {
             if (e.currentTarget.value.length > 0) {
                 this.suggestMalady(e.currentTarget.value)
