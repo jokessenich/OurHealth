@@ -8,7 +8,7 @@
 .mal-head-box>h1{
     text-align: center;
     margin:0;
-    padding-top:50px;
+    padding-top:100px;
     color:white;
 
 }
@@ -18,18 +18,19 @@
     padding-left:25%;
     background-color: rgba(0,0,0,.5);
     font-family: 'Roboto Condensed', sans-serif;
-    font-size:14pt;
+    font-size:16pt;
 }
 
 .mal-head-box{
     background-color: rgba(0,0,0,.25);
     height: 100%;
+    padding-bottom: 50px;
 }
 
 .malady-page-head{
     background-image: url('https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
     background-size:cover;
-    height: 50vh;
+    height: auto;
     color: white;
 
 }

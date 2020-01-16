@@ -76,6 +76,10 @@ export default class Remedy extends React.Component {
         }
 
         if (this.state.feedback === false) {
+            this.setState({
+                feedback: true
+            })
+
             fetch(`${config.API_ENDPOINT}/likes/${localStorage.getItem('token')}`, {
                 method: 'POST',
                 headers: {
@@ -93,14 +97,14 @@ export default class Remedy extends React.Component {
                     this.setState({
                         liked: true,
                         likes: this.state.likes+1,
-                        feedback:true
+                        likeId: res.id
                     })
                 }
                     if(newStatus ===false){
                         this.setState({
                             liked: false,
                             dislikes: this.state.dislikes+1,
-                            feedback:true
+                            likeId: res.id
                         })}
                 })
 
@@ -164,7 +168,7 @@ export default class Remedy extends React.Component {
                         }  
 
                     if(this.state.liked ===false&&newStatus===null){
-                        this.setState({
+                         this.setState({
                             liked: newStatus,
                             dislikes:this.state.dislikes-1
                             })
