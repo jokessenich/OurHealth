@@ -20,8 +20,6 @@ export default class AddMalady extends React.Component {
             [e.currentTarget.id]: e.currentTarget.value
         })
 
-        console.log(this.state.description)
-
     }
 
     handleSubmit = (e) => {
