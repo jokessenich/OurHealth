@@ -85,7 +85,6 @@ export default class AddMalady extends React.Component {
                 }
                 return res.json()})
             .then(data => {
-                debugger;
                 window.location.assign(`${config.CLIENT_ROOT}/maladylist`)})
             .catch(error=>{
                 this.setState({

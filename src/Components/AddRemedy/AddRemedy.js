@@ -23,8 +23,6 @@ export default class AddRemedy extends React.Component {
             [e.currentTarget.id]: e.currentTarget.value
         })
 
-        console.log(this.state.description)
-
         if (e.currentTarget.id === "malady") {
             if (e.currentTarget.value.length > 0) {
                 this.suggestMalady(e.currentTarget.value)
@@ -162,7 +160,7 @@ export default class AddRemedy extends React.Component {
                         onChange={this.handleChange}>
                     </input><br />
 
-                    <label htmlFor='description'>Description</label><br />
+                    <label htmlFor='description'>Description (Min. 10 characters)</label><br />
                     <textarea
                         type='text'
                         id="description"

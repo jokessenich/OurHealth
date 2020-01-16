@@ -19,6 +19,7 @@
     background-color: rgba(0,0,0,.5);
     font-family: 'Roboto Condensed', sans-serif;
     font-size:16pt;
+    white-space: pre-wrap;
 }
 
 .mal-head-box{
@@ -56,6 +57,7 @@
 
 .malady-subsection>p{
     font-size: 16pt;
+    white-space: pre-wrap;
 }
 
 .symptoms-label{
