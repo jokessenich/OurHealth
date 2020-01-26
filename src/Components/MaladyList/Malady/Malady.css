@@ -49,6 +49,10 @@
     color: white;
 }
 
+section.remedy-list-page {
+    display: flex;
+}
+
 .remedies-header>h1{
     text-align: center;
     padding-top: 30vh;
@@ -98,4 +102,15 @@
 .no-remedies{
     text-align:center;
     font-size: 24pt;
+}
+
+.remedy-list {
+    margin-bottom: 110%;
+}
+
+.remedy-list.wide{
+    margin-bottom:5%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }

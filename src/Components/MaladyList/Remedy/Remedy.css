@@ -4,10 +4,18 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
+    border-radius: 10px;
+    background-color: #84a64d80;
+    padding:20px;
+}
+
+.remedy-section:hover{
+    cursor: pointer;
 }
 
 .remedy-section>p{
     margin-left:20px;
+    margin-right: 20px;
 }
 
 .liked{
@@ -47,4 +55,52 @@
 .feedback-error{
     margin-top:20px;
     color: red;
+}
+
+.remedy-section.full {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 50%;
+    overflow-y: scroll;
+    overflow-x: overlay;
+    width: 90%;
+    background-color: #687c5c;
+    padding: 10px;
+}
+
+.hide{
+    font-size: 1em;
+    margin-top:0;
+    margin-left: 95%;
+    padding:10px;
+    color: white;
+}
+
+.hide:hover{
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+
+    .remedy-section.full {
+        position: fixed;
+        right: 0px;
+        width: 50%;
+        top: 0;
+        margin-right: 0px;
+        height: 70%;
+        padding-left: 5%;
+    }
+
+    .remedy-section.abbrev {
+        margin-left: 5%;
+    }
+
+    .remedy-list {
+        width: 45%;
+        margin-bottom:5%;
+    }
+
 }

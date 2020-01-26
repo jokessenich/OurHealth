@@ -11,13 +11,18 @@ export default class Malady extends React.Component {
         this.state = {
             showForm: false,
             showSym: true,
-            error: ""
+            error: "",
+            id: ""
         }
 
     }
 
     static contextType = Context
 
+    componentDidMount(){
+        window.scrollTo(0,0)
+
+    }
 
     updateForm = () => {
         this.context.isLoggedIn?
@@ -35,16 +40,23 @@ export default class Malady extends React.Component {
         })
     }
 
-    handleLikeSort(likes, id){
-        return likes.length
-    }
-
     compare(a,b){
         return b.likes-a.likes
     }
 
-    render() {
+    selectRem=(id)=>{
+        this.setState({
+            id: id
+        })        
+    }
     
+    closeRem = ()=>{
+        this.setState({
+            id:""
+        })
+    }
+
+    render() {
         const remedy = this
                         .context
                         .remedies
@@ -77,12 +89,36 @@ export default class Malady extends React.Component {
         const remedyPage = remedy.length !== 0 ? remedyWithLikes.sort(this.compare).map(remedy => <Remedy 
                                                                         rem={remedy} 
                                                                         key={remedy.id}
-                                                                        handleLikeSort = {this.handleLikeSort}>
+                                                                        abbrev = {true}
+                                                                        select = {this.selectRem}
+                                                                        >
                                                                         </Remedy>)
                                                                         :
                                                                     <p className ="no-remedies">
                                                                         There are no remedies for this condition yet.
                                                                         </p>
+        
+        const selectedPage =  this.state.id !==""?
+                                <div className = "remedy-selected-page">
+                
+                                    {<Remedy 
+                                        rem={remedy.filter(remedy=>remedy.id === this.state.id)[0]} 
+                                        key={this.state.id}
+                                        abbrev = {false}
+                                        close = {this.closeRem}
+                                    ></Remedy>}
+                                </div>
+                                : ""
+
+        const remedyList= this.state.id !==""?
+                                        <div className = "remedy-list">
+                                            {remedyPage}
+                                        </div>
+                                        :
+                                        <div className = "remedy-list wide">
+                                            {remedyPage}
+                                        </div>
+                                    
         return (
             <div className='malady-page'>
 
@@ -94,10 +130,19 @@ export default class Malady extends React.Component {
                 </section>
 
                 <section className="remedy-page">
+
                     {this.state.showForm && <AddRemedy noHeader={true} autofillName = {malady[0].malady_name}></AddRemedy>}
+
                     <p className="click-to-add" onClick={this.updateForm}>Click to {this.state.showForm ? "collapse form" : "add remedy"}</p>
                     <p className="add-error">{this.state.error}</p>
-                    {remedyPage}
+
+                    <section className = "remedy-list-page">
+
+                        {remedyList}
+
+                        {selectedPage}
+
+                    </section>
                 </section>
             </div>
         )

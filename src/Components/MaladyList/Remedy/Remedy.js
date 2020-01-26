@@ -13,7 +13,9 @@ export default class Remedy extends React.Component {
             likes: 0,
             dislikes: 0,
             createdRem: [],
-            error: ""
+            error: "",
+            abbrev: this.props.abbrev,
+            hide: false
         }
     }
 
@@ -65,8 +67,6 @@ export default class Remedy extends React.Component {
             likes: likesForRemedy.length,
             dislikes: dislikesForRemedy.length
         })
-
-        this.props.handleLikeSort(likesForRemedy, this.props.rem.id)
 
     }
 
@@ -274,19 +274,56 @@ export default class Remedy extends React.Component {
                                                                                             onClick={()=>this.setState({error:"Must be logged in to give feedback"})}
                                                                                             alt="thumbs down icon" />
                                                                                 </div>
-                                                                                                            
+        const description = this.props.rem.remedy_description.length > 100 ?
+                            this.props.rem.remedy_description.substring(0,100)+ "..."
+                            :
+                            this.props.rem.remedy_description
+                            
+                            
         return (
+                this.state.hide? 
+                ""
+                :
+                <section className = "remedy-listing">
+                    {this.state.abbrev?
+                    
+                        <div className="remedy-section abbrev" onClick = {()=>this.props.select(this.props.rem.id)}>
+                        
+                            <h2>{this.props.rem.remedy_name}</h2>
 
-            <div className="remedy-section">
-                <h2>{this.props.rem.remedy_name}</h2>
+                            <p>{description}</p>
 
-                <p>{this.props.rem.remedy_description}</p>
-                {likeIt()}
-                <p className ="feedback-error">{this.state.error}</p>
-                {deleteIt}
-                <p>Reference: {this.props.rem.remedy_reference}</p>
-                <p>--</p>
-            </div>
+                            {likeIt()}
+
+                            <p className ="feedback-error">{this.state.error}</p>
+
+                        </div>
+                        :
+                        <div className="remedy-section full" >
+                            <h2 className = "hide" onClick = {()=>{
+                                                        this.setState({hide:true})
+                                                        this.props.close()
+                                                        }}>
+                                                                    x
+                            </h2>
+
+                            <h2>{this.props.rem.remedy_name} </h2>
+
+                            <p>{this.props.rem.remedy_description}</p>
+
+                            {likeIt()}
+
+                            <p className ="feedback-error">{this.state.error}</p>
+
+                            {deleteIt}
+
+                            <p>Reference: {this.props.rem.remedy_reference}</p>
+
+                        </div>
+                        }
+
+                    </section>
+            
         )
     }
 }
