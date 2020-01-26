@@ -66,7 +66,7 @@ export default class Remedy extends React.Component {
             dislikes: dislikesForRemedy.length
         })
 
-
+        this.props.handleLikeSort(likesForRemedy, this.props.rem.id)
 
     }
 

@@ -8,7 +8,8 @@ export default class AddRemedy extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            malady: "",
+            malady: this.props.autofillName,
+            touched: false,
             remedy: "",
             reference: "",
             description: "",
@@ -24,6 +25,11 @@ export default class AddRemedy extends React.Component {
         })
 
         if (e.currentTarget.id === "malady") {
+            
+            this.setState({
+                touched: true
+            })
+
             if (e.currentTarget.value.length > 0) {
                 this.suggestMalady(e.currentTarget.value)
             }
@@ -130,9 +136,17 @@ export default class AddRemedy extends React.Component {
     }
 
     render() {
-        debugger;
+        
         let autofill = this.state.options.length === 0 && 
-                        this.state.malady.length!==0 ? <Link to='/addMalady' className="autofill-rem">No Matches. Click to Add</Link> : this.state.options.map(mal => <p className="autofill-rem" onClick={() => this.handleFill(mal.malady_name)} key={mal.id} to={`/malady/${mal.id}`}>{mal.malady_name}</p>)
+                        this.state.malady.length!==0 &&
+                        this.state.touched=== true
+                        ? 
+                        <Link to='/addMalady' className="autofill-rem">No Matches. Click to Add</Link> 
+                        : 
+                        this
+                        .state
+                        .options
+                        .map(mal => <p className="autofill-rem" onClick={() => this.handleFill(mal.malady_name)} key={mal.id} to={`/malady/${mal.id}`}>{mal.malady_name}</p>)
 
         let header = this.props.noHeader ? <header>
                                                 <h1 className="malady-page-header">Add Remedy</h1>

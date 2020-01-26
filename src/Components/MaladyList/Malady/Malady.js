@@ -13,9 +13,11 @@ export default class Malady extends React.Component {
             showSym: true,
             error: ""
         }
+
     }
 
     static contextType = Context
+
 
     updateForm = () => {
         this.context.isLoggedIn?
@@ -33,12 +35,21 @@ export default class Malady extends React.Component {
         })
     }
 
+    handleLikeSort(likes, id){
+        return likes.length
+    }
+
+    compare(a,b){
+        return b.likes-a.likes
+    }
+
     render() {
     
         const remedy = this
                         .context
                         .remedies
                         .filter(remedy => remedy.remedy_malady === parseInt(this.props.match.params.id))
+                        
         const malady = this.context.maladies.filter(malady => malady.id === parseInt(this.props.match.params.id))
         const maladyPage = malady.map(malady => <div className="malady-section" key={malady.id}>
 
@@ -55,15 +66,23 @@ export default class Malady extends React.Component {
                                                     </section>
                                                     
                                                 </div>)
-        const remedyPage = remedy.length !== 0 ? remedy.map(remedy => <Remedy 
+                                                
+        const remedyWithLikes = remedy.map(remedy=> {
+            let container = {}
+            const remLikes = remedy.likes = this.context.likes.filter(likes => likes.remedyid === remedy.id && likes.liked === true).length
+            container = {likes:remLikes,...remedy}
+            return container;
+        })
+
+        const remedyPage = remedy.length !== 0 ? remedyWithLikes.sort(this.compare).map(remedy => <Remedy 
                                                                         rem={remedy} 
-                                                                        key={remedy.id}>
-                                                                        </Remedy>) 
+                                                                        key={remedy.id}
+                                                                        handleLikeSort = {this.handleLikeSort}>
+                                                                        </Remedy>)
                                                                         :
                                                                     <p className ="no-remedies">
                                                                         There are no remedies for this condition yet.
                                                                         </p>
-
         return (
             <div className='malady-page'>
 
