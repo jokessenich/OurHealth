@@ -88,14 +88,10 @@
         position: fixed;
         right: 0px;
         width: 50%;
-        top: 0;
+        top: 20%;
         margin-right: 0px;
         height: 70%;
         padding-left: 5%;
-    }
-
-    .remedy-section.abbrev {
-        margin-left: 5%;
     }
 
     .remedy-list {

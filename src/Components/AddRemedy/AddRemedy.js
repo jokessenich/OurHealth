@@ -136,9 +136,8 @@ export default class AddRemedy extends React.Component {
     }
 
     render() {
-        
         let autofill = this.state.options.length === 0 && 
-                        this.state.malady.length!==0 &&
+                        this.state.malady!=="" &&
                         this.state.touched=== true
                         ? 
                         <Link to='/addMalady' className="autofill-rem">No Matches. Click to Add</Link> 
