@@ -33,9 +33,12 @@ export default class Malady extends React.Component {
         })
     }
 
-
     render() {
-        const remedy = this.context.remedies.filter(remedy => remedy.remedy_malady === parseInt(this.props.match.params.id))
+    
+        const remedy = this
+                        .context
+                        .remedies
+                        .filter(remedy => remedy.remedy_malady === parseInt(this.props.match.params.id))
         const malady = this.context.maladies.filter(malady => malady.id === parseInt(this.props.match.params.id))
         const maladyPage = malady.map(malady => <div className="malady-section" key={malady.id}>
 
@@ -52,7 +55,6 @@ export default class Malady extends React.Component {
                                                     </section>
                                                     
                                                 </div>)
-
         const remedyPage = remedy.length !== 0 ? remedy.map(remedy => <Remedy 
                                                                         rem={remedy} 
                                                                         key={remedy.id}>
@@ -73,7 +75,7 @@ export default class Malady extends React.Component {
                 </section>
 
                 <section className="remedy-page">
-                    {this.state.showForm && <AddRemedy noHeader={true}></AddRemedy>}
+                    {this.state.showForm && <AddRemedy noHeader={true} autofillName = {malady[0].malady_name}></AddRemedy>}
                     <p className="click-to-add" onClick={this.updateForm}>Click to {this.state.showForm ? "collapse form" : "add remedy"}</p>
                     <p className="add-error">{this.state.error}</p>
                     {remedyPage}

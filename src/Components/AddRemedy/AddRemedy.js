@@ -130,7 +130,7 @@ export default class AddRemedy extends React.Component {
     }
 
     render() {
-
+        debugger;
         let autofill = this.state.options.length === 0 && 
                         this.state.malady.length!==0 ? <Link to='/addMalady' className="autofill-rem">No Matches. Click to Add</Link> : this.state.options.map(mal => <p className="autofill-rem" onClick={() => this.handleFill(mal.malady_name)} key={mal.id} to={`/malady/${mal.id}`}>{mal.malady_name}</p>)
 
@@ -150,6 +150,7 @@ export default class AddRemedy extends React.Component {
                     <input
                         type='text'
                         id='malady'
+                        defaultValue = {this.props.autofillName}
                         onChange={this.handleChange}>
                     </input>{autofill}<br />
 
