@@ -38,6 +38,8 @@ export default class Main extends React.Component{
 
             <Route path = '/ErrorPage' component = {ErrorPage}></Route>
 
+            <Route path = '/searchresults/:searchterm' component = {SearchResults}></Route>
+
 
         </Switch>            
         )

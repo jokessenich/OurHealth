@@ -11,3 +11,7 @@ export default class Footer extends React.Component {
         )
     }
 }
+
+//<a href="https://icons8.com/icon/Z2P99cYdGXrI/sun-smiling">Sun Smiling icon by Icons8</a>
+//<a href="https://icons8.com/icon/76991/welfare">Welfare icon by Icons8</a>
+//<a href="https://icons8.com/icon/qNt-R6tmy_Ie/being-sick">Being Sick icon by Icons8</a>

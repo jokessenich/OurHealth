@@ -1,4 +1,4 @@
-.home-page{
+.home-search{
     text-align: center;
     display: flex column;
     justify-content: space-between;
@@ -76,7 +76,6 @@ button{
     margin-left:auto;
     margin-right: auto;
     margin-top: 50px;
-    background-color: rgba(183, 197, 224, 0.906);
     padding: 10px;
     border-radius: 10px;
     font-size: 14pt;
@@ -125,11 +124,29 @@ button{
     color: white;
 }
 
+.explain{
+    background-color: rgba(183, 197, 224, 0.906);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
 @media only screen and (min-width: 600px) {
 
-    .app-explain{
-        width: 50%
+    .explain {
+        width: 30%;
+        font-size: 12pt;
+        margin-right: 10px;
+        margin-left: 10px;
+
     }
+
+    section.app-explain {
+        justify-content: space-around;
+        display: flex;
+        width:80%;
+    }
+
 #home-search-term{
     width: 70%;
     
@@ -188,15 +205,22 @@ button{
     
 }
 
-.app-explain{
-    width: 40%
-}
+
 }
 
 @media only screen and (min-width: 825px) {
 
     #search-button{
         top: 427px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .explain {
+        width: 30%;
+        font-size: 14pt;
+        margin-right: 30px;
+        margin-left: 30px;
     }
 }
 

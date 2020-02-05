@@ -1,12 +1,46 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import Context from '../../Context'
+import { getNumOfRemedies } from '../../helperFunctions'
 import './SearchResults.css'
 
-export default class SearchResults extends React.Component{
-    render(){
-        return(
-            <div className = 'results-page'>
-            <h1>Results</h1>
-            <h2>List of Maladies</h2>
+export default class SearchResults extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
+    static contextType = Context
+
+
+    render() {
+
+        const term = this.props.match.params.searchterm
+
+        const maladyArray = this.context.maladies.filter(mal =>
+            mal.malady_name.toLowerCase().includes(term))
+
+        const maladyResults = maladyArray.map(malady => <Link to={`/malady/${malady.id}`} key={malady.id} className="browse-maladies-link">
+                                                            {malady.malady_name}
+                                                            <span className="remedies-counter">{getNumOfRemedies(this.context.remedies, malady.id).length + " Remedies"}</span>
+                                                            </Link>)
+
+        return (
+
+            <div className='malady-page'>
+
+                <header className="malady-head">
+                    <section className="border-box">
+                    <h1>Maladies Matching: "{term}"</h1>
+                    </section>
+                </header>
+
+                <section className="browse-maladies-section">
+
+                    {maladyResults}
+
+                </section>
+                
             </div>
         )
     }

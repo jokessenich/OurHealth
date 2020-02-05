@@ -22,13 +22,13 @@ export default class Home extends React.Component {
         const searchTerm = e.currentTarget['home-search-term'].value.toLowerCase()
         const maladyArr = this.context.maladies.filter(mal=> mal.malady_name.toLowerCase().includes(searchTerm))
         
-        if(!maladyArr[0]){
+        if(!maladyArr){
             this.props.history.push(`maladynotfound/${searchTerm}`)
             return
         }
 
-        const malId=maladyArr[0].id
-        this.props.history.push(`malady/${malId}`)
+        
+        this.props.history.push(`searchresults/${searchTerm}`)
     }
 
     handleChange=(e)=>{
@@ -67,7 +67,6 @@ export default class Home extends React.Component {
         return (
 
             <div className="home-page">
-
                 <section className="home-search">
                     <h1 className = "home-hero">Alternative Remedies for the People.{<br />} <span className = "subheader-home">By the People.</span></h1>
                     
@@ -90,7 +89,19 @@ export default class Home extends React.Component {
                 </section>
 
                 <section className="app-explain">
-                    <p>OurHealth allows you to find and share the best alternative and natural remedies.</p>
+                    <div className = "explain sick">
+                        <img src="https://img.icons8.com/officel/80/000000/being-sick.png" alt= "icon of hospital bed" height="60" width = "60" />
+                        <p>When you're feeling ill, use Our Health to diagnose your ailment and browse natural home remedies.</p>
+                        </div>
+                    <div className = "explain find">
+                        <img src="https://img.icons8.com/dusk/64/000000/sun-smiling.png" alt= "icon of smiling sun" height = "60" width = "60" />
+                        <p>Choose your remedy and start to feel better!</p>
+                    </div>
+                    <div className = "explain help">
+                        <img src="https://img.icons8.com/dusk/64/000000/welfare.png" alt = "icon of helping hands" height = "60" width = "60" />
+                        <p>Share your experiences or add another home remedy</p>
+                    </div>
+
                 </section>
 
             </div>
