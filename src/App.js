@@ -87,8 +87,10 @@ class App extends React.Component {
     }
 
     const appPage = this.state.error? <div>
-  <h1>Something went wrong  :/ {<br />}We are working on a fix :)</h1>
-                                      </div>:
+                                        <h1>Something went wrong  :/ {<br />}We are working on a fix :)</h1>
+                                      </div>
+                                      
+                                      :
                                       
                                       <Context.Provider value={contextVal}>
                                       <div className="app">
@@ -99,11 +101,11 @@ class App extends React.Component {
                                         <Footer></Footer>
                                       </div>
                                   </Context.Provider>
-return (
-      <div>
-        {appPage}
-      </div>
-    );
-  }
-}
+    return (
+          <div>
+            {appPage}
+          </div>
+        );
+      }
+    }
 export default App;

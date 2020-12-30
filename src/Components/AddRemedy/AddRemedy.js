@@ -2,6 +2,7 @@ import React from 'react'
 import './AddRemedy.css'
 import config from '../../config'
 import Context from '../../Context'
+import { RadioGroup, RadioButton, ReversedRadioButton } from 'react-radio-buttons'
 import { Link } from 'react-router-dom'
 
 export default class AddRemedy extends React.Component {
@@ -14,12 +15,20 @@ export default class AddRemedy extends React.Component {
             reference: "",
             description: "",
             options: [],
-            error: ""
+            error: "",
+            category: "all"
         }
     }
     static contextType = Context
 
+    handleRadio = (e) => {
+        this.setState({
+            category : e
+        })
+    }
+
     handleChange = (e) => {
+
         this.setState({
             [e.currentTarget.id]: e.currentTarget.value
         })
@@ -60,7 +69,7 @@ export default class AddRemedy extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const { malady, remedy, reference, description } = this.state
+        const { malady, remedy, reference, description, category } = this.state
         const maladyResults = this.context.maladies.filter(mal => mal.malady_name.toLowerCase() === malady.toLowerCase())
         
         if(this.context.isLoggedIn===false){
@@ -102,16 +111,21 @@ export default class AddRemedy extends React.Component {
         }
 
         fetch(`${config.API_ENDPOINT}/remedies/add/${localStorage.getItem('token')}`, {
+            
             method: 'POST',
+            
             headers: {
                 'Content-Type': 'application/json'
             },
+            
             body: `{"remedy_name": "${remedy}",
                     "remedy_description": ${newDescription},
                     "remedy_malady": "${maladyResults[0].id}",
-                    "remedy_reference": "${reference}"
+                    "remedy_reference": "${reference}",
+                    "remedy_category": "${category}"
                 }`
         })
+
             .then(res => {
                 if(!res.ok){
                     return res.json()
@@ -174,12 +188,41 @@ export default class AddRemedy extends React.Component {
                         onChange={this.handleChange}>
                     </input><br />
 
+                    <label htmlFor = "category">Category</label>
+                    <RadioGroup onChange={ this.handleRadio } className = "radioGroup" id = "radioGroup">
+
+                        <ReversedRadioButton value="supplemental" className = "radio" rootColor = "black"> 
+                            Supplemental - Something you can take/apply
+                            {<br />}
+                            (e.g. Herbs, salve, etc.) 
+                        </ReversedRadioButton>
+
+                        <ReversedRadioButton value="lifestyle" className = "radio" rootColor = "black" style = "backgroundColor: blue;">
+                            Lifestyle - Something you can change daily
+                            {<br />}
+                            (e.g. Diet, exercise, etc.)
+                        </ReversedRadioButton>
+
+                        <ReversedRadioButton value="energetic" className = "radio" rootColor = "black">
+                            Energetic - Removing internal blockages
+                            {<br />}
+                            (e.g. Visualization, massage, meditation, etc.)
+                        </ReversedRadioButton>
+
+                        <ReversedRadioButton value="all" className = "radio" rootColor = "black">
+                            All - Display remedy for any category of search
+                            {<br />}
+                            (e.g. Stay away from sweet foods and take melatonin)
+                        </ReversedRadioButton>
+
+                    </RadioGroup>
+
                     <label htmlFor='description'>Description (Min. 10 characters)</label><br />
                     <textarea
                         type='text'
                         id="description"
                         cols="30"
-                        rows="10"
+                        rows="15"
                         onChange={this.handleChange}
                     ></textarea><br />
 

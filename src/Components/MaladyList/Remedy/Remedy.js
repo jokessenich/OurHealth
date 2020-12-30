@@ -290,7 +290,7 @@ export default class Remedy extends React.Component {
                         <div className="remedy-section abbrev" onClick = {()=>this.props.select(this.props.rem.id)}>
                         
                             <h2>{this.props.rem.remedy_name}</h2>
-
+                            <h3>{this.props.rem.remedy_category}</h3>
                             <p>{description}</p>
 
                             {likeIt()}

@@ -9,21 +9,43 @@ export default class Home extends React.Component {
         this.state = {
             searchTerm: "",
             options: [],
-            optionIds:[]
+            optionIds:[],
+            searchByName: true
         }
+        this.searchButton= React.createRef();
+        this.clickSearch = this.clickSearch.bind(this);
+
     }
 
     static contextType = Context
+    clickSearch(){
+        this.searchButton.current.click();
+    }
 
     handleSearch=(e)=> {
 
         e.preventDefault()
 
         const searchTerm = e.currentTarget['home-search-term'].value.toLowerCase()
-        const maladyArr = this.context.maladies.filter(mal=> mal.malady_name.toLowerCase().includes(searchTerm))
+        const maladyArr = this.state.searchByName? this.context.maladies.filter(mal=> mal.malady_name.toLowerCase().includes(searchTerm)) 
+            :
+            this.context.maladies.filter(mal=> mal.malady_symptoms.toLowerCase().includes(searchTerm))
         
-        if(!maladyArr){
+            debugger;
+        
+        if(searchTerm === ""){
+            this.props.history.push(`maladylist`)
+            return
+        }
+ 
+        if(maladyArr.length === 0){
             this.props.history.push(`maladynotfound/${searchTerm}`)
+            return
+        }
+
+
+        if(this.state.searchByName===false){
+            this.props.history.push(`searchsymptoms/${searchTerm}`)
             return
         }
 
@@ -40,7 +62,7 @@ export default class Home extends React.Component {
         })
 
         if(e.currentTarget.value.length>1){
-            this.suggestMalady(e.currentTarget.value)
+            this.suggestMalady(e.currentTarget.value, this.state.searchByName)
             }
 
         if(e.currentTarget.value.length<2){
@@ -50,41 +72,66 @@ export default class Home extends React.Component {
         }
     }
 
-    suggestMalady=(frag)=>{
-        const options= this.context.maladies.filter(mal=> mal.malady_name
+    suggestMalady=(frag, searchByName)=>{
+        const options= searchByName?this.context.maladies.filter(mal=> mal.malady_name
                                                             .toLowerCase().includes(frag.toLowerCase())
                                                             && mal.malady_name
-                                                            .toLowerCase().charAt(0)===frag.toLowerCase().charAt(0))
+                                                            .toLowerCase().charAt(0)===frag.toLowerCase().charAt(0)):this.context.maladies.filter(mal=> mal.malady_symptoms
+                                                                .toLowerCase().includes(frag.toLowerCase()));
         this.setState({ 
             options: options,
         })
     }
 
+    
+    toggleButton=(e)=>{
+
+        e.preventDefault()
+        let searchByName = e.currentTarget.id === "toggle-search-name"? true: false
+        
+        this.setState({
+            searchByName: searchByName
+        })
+    }
+
     render() {
 
-        const autofill = this.state.options.map(mal=><Link className = "autofill" key = {mal.id} to = {`/malady/${mal.id}`}>{mal.malady_name}</Link>)
-        
+        const autofillName = this.state.options.map(mal=><Link className = "autofill" key = {mal.id} to = {`/malady/${mal.id}`}>{mal.malady_name}</Link>)
+
+        let placeholder = this.state.searchByName? "Find a condition. e.g. 'Flu'" : "Find a symptom. e.g. 'Cough'"
+
         return (
 
             <div className="home-page">
                 <section className="home-search">
                     <h1 className = "home-hero">Alternative Remedies for the People.{<br />} <span className = "subheader-home">By the People.</span></h1>
-                    
+                    <div className="searchbar-wrapper">
+                    <div className = "toggle-buttons">
+                        <button id = "toggle-search-name" className = {`toggle-search ${this.state.searchByName?"active":""}`} onClick = {this.toggleButton}>Name</button>
+                        <button id = "toggle-search-symptom" className = {`toggle-search ${!this.state.searchByName?"active":""}`} onClick = {this.toggleButton}>Symptom</button>
+                    </div>
                     <form onSubmit={this.handleSearch} id = 'home-search-form'>
+
                         <input type='text' 
                                 id='home-search-term' 
-                                placeholder = "Find a condition. e.g. 'Flu'"
+                                placeholder = {placeholder}
                                 onChange = {this.handleChange}>
                                 </input>
-
 
                         <button
                             type='submit'
                             id = 'search-button'
-                            ></button>
-                    </form>
+                            ref={this.searchButton}
+                            >
+                            </button>
 
-                    {autofill}
+                    </form>
+                    <div className="autofill-container">
+                        {autofillName.length>0?<p className="autofill first-entry" onClick={this.clickSearch}>Show all results with {this.state.searchByName?"name":"symptoms"} matching "{this.state.searchTerm}"</p>:""}
+                    {autofillName.length>5?  autofillName.slice(0,5): autofillName}
+                    {autofillName.length>0?<p className="autofill end-af"></p>:""}
+                    </div>
+                    </div>
 
                 </section>
 

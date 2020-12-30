@@ -24,32 +24,61 @@
 
 }
 
+.end-af{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height:5px;
+}
+
+.autofill.end-af:hover{
+    cursor:default;
+    background-color: rgb(240, 234, 248);
+}
+
+
 .home-browse:hover{
     background-color: gray;
     color: white;
 }
 
+.first-entry{
+    font-weight: bold;
+
+}
+
 .autofill{
-    display:block;
-    border: .5px solid black;
-    width: 200px;
+    display: block;
+    width: 95%;
     color: black;
     text-decoration: none;
-    border-radius: 5px;
-    margin:auto;
-    padding: 3px;
-    margin-top: 1px;
+    margin: auto;
+    padding: 15px;
     background-color: rgb(240, 234, 248);
 }
 
 .autofill:hover{
     background-color: papayawhip;
+    cursor:pointer;
 }
 
-button{
-    margin: 10px;
+.toggle-search {
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    height:40px;
+    cursor: pointer;
 }
 
+.toggle-buttons {
+    text-align: left;
+    margin-left: 10%;
+    height:35px;
+}
+
+.active{
+    background:rgb(240, 234, 248);
+}
 #search-button{
     
     background-image: url("https://img.icons8.com/ios-glyphs/60/000000/search.png");
@@ -60,10 +89,11 @@ button{
     width: 45px;
     margin-left: -55px;
     border-radius: 5px;
-    background-color: white;
+    background-color: rgb(240, 234, 248);
     border: none;
-    margin-top: 11px;
-    margin-right: 14px
+    margin-top:12px;
+    margin-bottom: 10px;
+
 }
 
 #search-button:hover{
@@ -93,6 +123,14 @@ button{
     margin-bottom: 50px;
 }
 
+.autofill-container{
+    width:80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: -10px;
+
+}
+
 #home-search-label{
     font-size:20pt;
     font-weight: bolder;
@@ -100,24 +138,28 @@ button{
 }
 
 #home-search-form{
-    margin-top: 0px;
+    margin-top: -12px;
     width: 80%;
     border-radius: 10px;
     margin-right: auto;
     margin-left: auto;
     display: flex;
     align-items: center;
+    margin-bottom:0px;
 }
 
 #home-search-term{
     border-radius: 5px;
     font-size: 12pt;
-    margin: 10px;
     width:100%;
     padding: 15px;
     border: none;
     margin-left:auto;
     margin-right:auto;
+    margin-top:0px;
+    margin-bottom: -5px;
+    background-color:rgb(240, 234, 248);
+
 }
 
 .subheader-home{
@@ -132,6 +174,12 @@ button{
 }
 
 @media only screen and (min-width: 600px) {
+    #home-search-form{
+        margin-top: 0px;
+    }
+    .toggle-buttons {
+        margin-left:20%;
+    }
 
     .explain {
         width: 30%;
@@ -155,7 +203,8 @@ button{
 #search-button{
     right: 20%;
     position: absolute;
-    top: 402px;
+    top: 440px;
+    margin-top: 0px;
 
 }
 
@@ -167,35 +216,36 @@ button{
     width: 60%;
 }
 
+.autofill{
+    width:70%;
 }
 
-@media only screen and (min-width: 600px) {
-
-    #search-button{
-
-        top: 402px;
-    
-    }
 }
+
 
 
 @media only screen and (min-width: 680px) {
 
     #search-button{
 
-        top: 472px;
+        top: 510px;
     
     }
 }
 
 @media only screen and (min-width: 808px) {
-
-    #search-button{
-        top: 472px;
-        right:28%
+    .toggle-buttons {
+        margin-left:28.5%;
     }
 
+    #search-button{
+        top: 510px;
+        right:29%
+    }
 
+    .autofill{
+        width:50%;
+    }
 .home-browse{
     width: 42%;
 }
@@ -211,11 +261,14 @@ button{
 @media only screen and (min-width: 825px) {
 
     #search-button{
-        top: 427px;
+        top: 467px;
     }
 }
 
 @media only screen and (min-width: 1200px) {
+    .toggle-buttons {
+        margin-left:29%;
+    }
     .explain {
         width: 30%;
         font-size: 14pt;
@@ -228,5 +281,8 @@ button{
 
     #search-button{
         right:29%
+    }
+    .toggle-buttons {
+        margin-left:29.5%;
     }
 }

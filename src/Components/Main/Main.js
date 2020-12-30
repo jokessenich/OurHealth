@@ -10,6 +10,7 @@ import Malady from '../MaladyList/Malady/Malady'
 import AddMalady from '../AddMalady/AddMalady.js'
 import MaladyNotFound from '../MaladyNotFound/MaladyNotFound.js'
 import ErrorPage from '../../ErrorPage/ErrorPage.js'
+import SearchSymptoms from '../../SearchSymptoms/SearchSymptoms'
 
 export default class Main extends React.Component{
 
@@ -40,6 +41,7 @@ export default class Main extends React.Component{
 
             <Route path = '/searchresults/:searchterm' component = {SearchResults}></Route>
 
+            <Route path = '/searchsymptoms/:searchterm' component = {SearchSymptoms}></Route>
 
         </Switch>            
         )
